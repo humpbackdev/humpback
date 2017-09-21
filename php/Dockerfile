@@ -17,6 +17,9 @@ RUN docker-php-source extract \
     && docker-php-ext-configure zip \
     && docker-php-ext-configure iconv \
     && docker-php-ext-configure xml \
+    && docker-php-ext-configure opcache \
+    && docker-php-ext-configure pdo \
+    && docker-php-ext-configure pdo_mysql \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-source delete
 RUN docker-php-ext-install json \
@@ -29,4 +32,7 @@ RUN docker-php-ext-install json \
     zip \
     iconv \
     xml \
+    opcache \
+    pdo \
+    pdo_mysql \
     gd
