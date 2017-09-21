@@ -1,0 +1,27 @@
+version: "3"
+services:
+  db:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD="root"
+      - MYSQL_DATABASE="drupal"
+      - MYSQL_USER="drupal"
+      - MYSQL_PASSWORD="drupal"
+    expose:
+      - "3306"
+  php:
+    build: ./php
+    expose:
+      - "9000"
+    links:
+      - db
+    volumes:
+        - "./docroot:/var/www/html"
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    links:
+      - php
+    volumes:
+        - "./docroot:/var/www/html"
