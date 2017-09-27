@@ -37,4 +37,10 @@ Please be patient because it takes around 3-5 minutes to start when you create t
 
 Core is created as "collection1". Solr address is "solr". Path is "/solr".
 
+### Cli
+
+This container have some cli utilities to manage your drupal site. See https://hub.docker.com/r/kporras07/docker-drupal-cli/ for more info.
+
+In order to access the cli, you should run `docker ps`, find the cli container and then run `docker exec -it <id> bash`. Now, you can run commands like drush, ahoy, composer, node, grunt, python, etc inside the container.
+
 Have fun!

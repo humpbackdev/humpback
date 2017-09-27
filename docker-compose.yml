@@ -37,3 +37,13 @@ services:
       - php
     volumes:
         - "./docroot:/var/www/html"
+  cli:
+    image: kporras07/docker-drupal-cli:latest
+    links:
+      - php
+      - nginx
+      - db
+      - solr
+    volumes:
+        - "./docroot:/var/www/html"
+        - "~/.ssh:/.ssh"
