@@ -12,7 +12,7 @@ services:
       - "-d"
       - "/config"
   db:
-    image: mariadb:latest
+    image: mariadb:10.3
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=drupal
@@ -38,7 +38,7 @@ services:
     volumes:
         - "./docroot:/var/www/html"
   cli:
-    image: kporras07/docker-drupal-cli:latest
+    image: kporras07/docker-drupal-cli:v0.10.4
     links:
       - php
       - nginx
