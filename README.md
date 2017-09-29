@@ -1,5 +1,7 @@
 # Docker Drupal
 
+[![Build Status](https://travis-ci.org/kporras07/docker-drupal.svg?branch=master)](https://travis-ci.org/kporras07/docker-drupal)
+
 Docker setup to run Drupal in docker.
 
 ## Setup Drupal
