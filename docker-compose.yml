@@ -21,7 +21,7 @@ services:
     expose:
       - "3306"
   php:
-    build: ./php
+    image: kporras07/docker-php:v1.0
     expose:
       - "9000"
     links:
