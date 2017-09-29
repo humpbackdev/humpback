@@ -4,12 +4,12 @@ Docker setup to run Drupal in docker.
 
 ## Setup Drupal
 
-Place Drupal under docroot folder.
+Place Drupal under web folder.
 
 Set right permissions:
 
 ```
-chmod o+w docroot/sites/default/files/
+chmod o+w web/sites/default/files/
 ```
 
 ## Build Environment

@@ -28,7 +28,7 @@ services:
       - db
       - solr
     volumes:
-        - "./docroot:/var/www/html"
+        - "./web:/var/www/html"
   nginx:
     build: ./nginx
     ports:
@@ -36,7 +36,7 @@ services:
     links:
       - php
     volumes:
-        - "./docroot:/var/www/html"
+        - "./web:/var/www/html"
   cli:
     image: kporras07/docker-drupal-cli:v0.10.4
     links:
@@ -45,5 +45,5 @@ services:
       - db
       - solr
     volumes:
-        - "./docroot:/var/www/html"
+        - "./web:/var/www/html"
         - "~/.ssh:/.ssh"
