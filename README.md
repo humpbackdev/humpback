@@ -23,7 +23,7 @@ After placing Drupal in the right folder, you should run `docker-compose up -d` 
 
 ### Nginx
 
-Nginx is running in port 80. Accessible from http://localhost:8080.
+Nginx is running in port 80. Use `ahoy docker url` to get the url.
 
 ### PHP-FPM
 
