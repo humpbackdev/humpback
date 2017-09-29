@@ -44,3 +44,7 @@ This container have some cli utilities to manage your drupal site. See https://h
 In order to access the cli, you should run `docker ps`, find the cli container and then run `docker exec -it <id> bash`. Now, you can run commands like drush, ahoy, composer, node, grunt, python, etc inside the container.
 
 Have fun!
+
+## Ahoy commands
+
+Some helpful commands are included using useful ahoy cli utility. In order to use them, you must install ahoy (https://github.com/ahoy-cli/ahoy) and then `ahoy help`
