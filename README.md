@@ -16,8 +16,8 @@ chmod o+w web/sites/default/files/
 
 ## Build Environment
 
-To build this environment you need recent docker composer and docker versions.
-After placing Drupal in the right folder, you should run `docker-compose up -d` and voilá! You can access your Grav installation at `http://localhost:8080`
+To build this environment you need recent docker compose and docker versions.
+After placing Drupal in the right folder, you should run `docker-compose up -d` or `ahoy up` and voilá! You can access your Drupal installation at the url provided by `ahoy docker url`
 
 ## Installed Stuff
 
