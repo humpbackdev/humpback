@@ -43,7 +43,11 @@ Core is created as "collection1". Solr address is "solr". Path is "/solr".
 
 This container have some cli utilities to manage your drupal site. See https://hub.docker.com/r/kporras07/docker-drupal-cli/ for more info.
 
-In order to access the cli, you should run `docker ps`, find the cli container and then run `docker exec -it <id> bash`. Now, you can run commands like drush, ahoy, composer, node, grunt, python, etc inside the container.
+In order to access the cli, you should run `ahoy bash`. Now, you can run commands like drush, ahoy, composer, node, grunt, python, etc inside the container.
+
+## Ngrok
+
+This is used to share your local environment over the internet. In order to do this, you should run `ahoy docker share-url`. This command will give you an url that you can access in your browser and get the share urls for http and https.
 
 Have fun!
 
