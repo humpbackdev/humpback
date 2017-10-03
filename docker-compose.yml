@@ -46,6 +46,7 @@ services:
       - db
       - solr
       - memcached
+      - browser
     volumes:
         - "./web:/var/www/html"
         - "~/.ssh:/.ssh"
@@ -54,3 +55,13 @@ services:
     environment:
       # Memcached memory limit in megabytes
       - MEMCACHED_MEMORY_LIMIT=128
+
+  browser:
+    image: selenium/standalone-chrome-debug:3.6.0
+    # This helps keep selenium-chrome from crashing because it uses shared memory.
+    volumes:
+      - /dev/shm:/dev/shm
+    links:
+      - nginx
+    ports:
+      - "5900"
