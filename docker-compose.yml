@@ -68,7 +68,9 @@ services:
 
   share:
     image: fnichol/ngrok
+    environment:
+      - HTTP_PORT=nginx:80
     links:
-      - nginx:http
+      - nginx
     ports:
-        - "4040:4040"
+        - "4040"
