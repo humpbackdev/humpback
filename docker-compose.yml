@@ -65,3 +65,12 @@ services:
       - nginx
     ports:
       - "5900"
+
+  share:
+    image: fnichol/ngrok
+    environment:
+      - HTTP_PORT=nginx:80
+    links:
+      - nginx
+    ports:
+        - "4040"
