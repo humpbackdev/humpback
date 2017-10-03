@@ -1,6 +1,6 @@
-# Docker Drupal
+# Humpback
 
-[![Build Status](https://travis-ci.org/kporras07/docker-drupal.svg?branch=master)](https://travis-ci.org/kporras07/docker-drupal)
+[![Build Status](https://travis-ci.org/kporras07/humpback.svg?branch=master)](https://travis-ci.org/kporras07/humpback)
 
 Docker setup to run Drupal in docker.
 
