@@ -73,4 +73,13 @@ services:
     links:
       - nginx
     ports:
-        - "4040"
+      - "4040"
+  varnish:
+    image: thiagofigueiro/varnish-alpine-docker:3.5
+    environment:
+      - VARNISH_BACKEND_ADDRESS=nginx
+      - VARNISH_BACKEND_PORT=80
+    links:
+      - nginx
+    ports:
+      - "80"

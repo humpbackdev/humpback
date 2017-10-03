@@ -45,6 +45,11 @@ commands:
     cmd: |
       echo "http://127.0.0.1:`ahoy docker compose port share 4040|cut -d ':' -f2`"
 
+  varnish-url:
+    usage: Prints the project varnish URL
+    cmd: |
+      echo "http://127.0.0.1:`ahoy docker compose port varnish 80|cut -d ':' -f2`"
+
   surl:
     usage: Prints a secure project URL
     cmd: |

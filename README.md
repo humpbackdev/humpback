@@ -49,6 +49,11 @@ In order to access the cli, you should run `ahoy bash`. Now, you can run command
 
 This is used to share your local environment over the internet. In order to do this, you should run `ahoy docker share-url`. This command will give you an url that you can access in your browser and get the share urls for http and https.
 
+## Varnish
+
+It's a reverse proxy usually used in production. It's bundled here for situations where you need to test with the varnish cache. In order to access the site through varnish, run `ahoy docker varnish-url` and open that url in your browser.
+
+
 Have fun!
 
 ## Ahoy commands
