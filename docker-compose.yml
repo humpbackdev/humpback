@@ -21,7 +21,7 @@ services:
     expose:
       - "3306"
   php:
-    image: kporras07/docker-php:v1.0
+    build: ./php
     expose:
       - "9000"
     links:
@@ -83,3 +83,9 @@ services:
       - nginx
     ports:
       - "80"
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - "1025"
+      - "8025"

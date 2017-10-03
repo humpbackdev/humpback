@@ -2,13 +2,13 @@ ahoyapi: v2
 usage: Docker commands for development using ahoy.
 commands:
   exec:
-    usage: Run a command in the docker-compose cli service container.
+    usage: Run a command in any existing service container.
     cmd: |
       all_args=$(echo "$@")
       first_arg=$(echo "$1")
       rest_args=$(echo "${@:2}")
       case $first_arg in
-        *nginx*|*mariadb*|*cli*|*solr*)
+        *nginx*|*db*|*cli*|*solr*|*php*|*browser*|*share*|*varnish*|*mailhog*|*memcached*)
           container=$first_arg
           args=" $rest_args"
           ;;
@@ -49,6 +49,11 @@ commands:
     usage: Prints the project varnish URL
     cmd: |
       echo "http://127.0.0.1:`ahoy docker compose port varnish 80|cut -d ':' -f2`"
+
+  mailhog-url:
+    usage: Prints the project mailhog URL
+    cmd: |
+      echo "http://127.0.0.1:`ahoy docker compose port mailhog 8025|cut -d ':' -f2`"
 
   surl:
     usage: Prints a secure project URL
