@@ -27,6 +27,7 @@ services:
     links:
       - db
       - solr
+      - memcached
     volumes:
         - "./web:/var/www/html"
   nginx:
@@ -44,6 +45,12 @@ services:
       - nginx
       - db
       - solr
+      - memcached
     volumes:
         - "./web:/var/www/html"
         - "~/.ssh:/.ssh"
+  memcached:
+    image: memcached:1-alpine
+    environment:
+      # Memcached memory limit in megabytes
+      - MEMCACHED_MEMORY_LIMIT=128
