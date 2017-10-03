@@ -53,6 +53,9 @@ This is used to share your local environment over the internet. In order to do t
 
 It's a reverse proxy usually used in production. It's bundled here for situations where you need to test with the varnish cache. In order to access the site through varnish, run `ahoy docker varnish-url` and open that url in your browser.
 
+## Mailhog
+
+To see the the mailhog UI, run `ahoy docker mailhog-url` and access that url from the browser. Your new messages will appear there.
 
 Have fun!
 

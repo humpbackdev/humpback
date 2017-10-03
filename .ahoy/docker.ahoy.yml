@@ -50,6 +50,11 @@ commands:
     cmd: |
       echo "http://127.0.0.1:`ahoy docker compose port varnish 80|cut -d ':' -f2`"
 
+  mailhog-url:
+    usage: Prints the project mailhog URL
+    cmd: |
+      echo "http://127.0.0.1:`ahoy docker compose port mailhog 8025|cut -d ':' -f2`"
+
   surl:
     usage: Prints a secure project URL
     cmd: |
