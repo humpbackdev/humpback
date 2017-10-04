@@ -1,6 +1,6 @@
 # Humpback
 
-[![Build Status](https://travis-ci.org/kporras07/humpback.svg?branch=master)](https://travis-ci.org/kporras07/humpback)
+[![Build Status](https://travis-ci.org/humpbackdev/humpback.svg?branch=master)](https://travis-ci.org/humpbackdev/humpback)
 
 Docker setup to run Drupal in docker.
 
