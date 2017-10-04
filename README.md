@@ -14,10 +14,10 @@ Set right permissions:
 chmod o+w web/sites/default/files/
 ```
 
-## Build Environment
+## Create Environment
 
-To build this environment you need recent docker compose and docker versions.
-After placing Drupal in the right folder, you should run `docker-compose up -d` or `ahoy up` and voilá! You can access your Drupal installation at the url provided by `ahoy docker url`
+To create this environment you need recent docker compose and docker versions and [ahoy](https://github.com/ahoy-cli/ahoy)
+After placing Drupal in the right folder, you should run `ahoy up` and voilá! You can access your Drupal installation at the url provided by `ahoy docker url`
 
 ## Installed Stuff
 
@@ -31,7 +31,7 @@ PHP is running in a separate container using fpm in port 9000 (not accessible fr
 
 ### Mariadb
 
-Credentials are in environment variables in docker-compose.yml.
+You can find credentials in environment variables in docker-compose.yml.
 
 ### Solr
 
@@ -61,8 +61,17 @@ It's a reverse proxy usually used in production. It's bundled here for situation
 
 To see the the mailhog UI, run `ahoy docker mailhog-url` and access that url from the browser. Your new messages will appear there.
 
-Have fun!
+## Contributing
 
-## Ahoy commands
+Use the project, fork it, and submit PRs. We are responsive and will review them as soon as possible!
 
-Some helpful commands are included using useful ahoy cli utility. In order to use them, you must install ahoy (https://github.com/ahoy-cli/ahoy) and then `ahoy help`
+## Credits and Usage
+
+Humpback is a trademark of Estudio Manatí S.A. You are free to use the logo to promote the Humpback product as long as you do not modify it in any way.
+
+Drupal is a registered trademark of Dries Buytaert.
+
+Docker and the Docker logo are trademarks or registered trademarks of Docker, Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
+
+
+Have fun working with Humpback!
