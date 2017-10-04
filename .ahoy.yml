@@ -17,7 +17,7 @@ commands:
     usage: Restart the docker-compose containers.
 
   drush:
-    cmd: docker-compose run cli drush --root=. "$@"
+    cmd: docker-compose run cli drush --root=/var/www/html/web "$@"
     usage: Run drush commands in the cli service container.
 
   bash:
