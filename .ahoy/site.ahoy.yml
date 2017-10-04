@@ -1,0 +1,6 @@
+ahoyapi: v2
+usage: Docker commands for this site development using ahoy.
+commands:
+  help:
+    usage: Print this help
+    cmd: ahoy site --help
