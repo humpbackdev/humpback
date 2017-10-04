@@ -29,7 +29,7 @@ services:
       - solr
       - memcached
     volumes:
-        - "./web:/var/www/html"
+        - "./:/var/www/html"
   nginx:
     build: ./nginx
     ports:
@@ -37,7 +37,7 @@ services:
     links:
       - php
     volumes:
-        - "./web:/var/www/html"
+        - "./:/var/www/html"
   cli:
     image: kporras07/docker-drupal-cli:v0.10.4
     links:
@@ -48,7 +48,7 @@ services:
       - memcached
       - browser
     volumes:
-        - "./web:/var/www/html"
+        - "./:/var/www/html"
         - "~/.ssh:/.ssh"
   memcached:
     image: memcached:1-alpine
