@@ -39,7 +39,7 @@ services:
     volumes:
         - "./:/var/www/html"
   cli:
-    image: kporras07/docker-drupal-cli:v0.10.4
+    image: kporras07/docker-drupal-cli:v0.10.5
     links:
       - php
       - nginx
