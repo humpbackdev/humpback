@@ -1,2 +1,3 @@
 script:
-  - docker-compose up -d
+  - wget -q https://github.com/ahoy-cli/ahoy/releases/download/2.0.0/ahoy-bin-linux-amd64 -O /usr/local/bin/ahoy && chown $USER /usr/local/bin/ahoy && chmod +x /usr/local/bin/ahoy
+  - ahoy up
