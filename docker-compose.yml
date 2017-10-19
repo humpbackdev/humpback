@@ -11,6 +11,9 @@ services:
       - "collection1"
       - "-d"
       - "/config"
+    networks:
+      - internal
+
   db:
     image: mariadb:10.3
     environment:
@@ -20,6 +23,9 @@ services:
       - MYSQL_PASSWORD=drupal
     expose:
       - "3306"
+    networks:
+      - internal
+
   php:
     build: ./php
     expose:
@@ -30,14 +36,29 @@ services:
       - memcached
     volumes:
         - "./:/var/www/html"
+    networks:
+      - internal
+
   nginx:
     build: ./nginx
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.backend=DDL-${VIRTUAL_HOST-localhost}'
+      - 'traefik.frontend.rule=Host:${VIRTUAL_HOST-localhost}'
+      - 'traefik.docker.network=humpback_proxy'
+      - 'traefik.port=80'
     ports:
       - "80"
     links:
       - php
     volumes:
         - "./:/var/www/html"
+    networks:
+      - internal
+      - humpback_proxy
+
   cli:
     image: kporras07/docker-drupal-cli:v0.10.6
     links:
@@ -50,11 +71,16 @@ services:
     volumes:
         - "./:/var/www/html"
         - "~/.ssh:/.ssh"
+    networks:
+      - internal
+
   memcached:
     image: memcached:1-alpine
     environment:
       # Memcached memory limit in megabytes
       - MEMCACHED_MEMORY_LIMIT=128
+    networks:
+      - internal
 
   browser:
     image: selenium/standalone-chrome-debug:3.6.0
@@ -65,6 +91,8 @@ services:
       - nginx
     ports:
       - "5900"
+    networks:
+      - internal
 
   share:
     image: fnichol/ngrok
@@ -74,6 +102,9 @@ services:
       - nginx
     ports:
       - "4040"
+    networks:
+      - internal
+
   varnish:
     image: thiagofigueiro/varnish-alpine-docker:3.5
     environment:
@@ -83,9 +114,18 @@ services:
       - nginx
     ports:
       - "80"
+    networks:
+      - internal
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
     ports:
       - "1025"
       - "8025"
+    networks:
+      - internal
+networks:
+  humpback_proxy:
+    external: true
+  internal:
+    external: false
