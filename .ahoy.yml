@@ -35,6 +35,10 @@ commands:
       docker-compose up -d
       ahoy docker hostfile
       URL=`ahoy docker url`
+      if [ ! -z "${CIRCLECI}" ] ; then
+        echo "Started. You can access your site at $URL"
+        exit 0
+      fi
       if type "xdg-open" &> /dev/null; then
         xdg-open $URL
       elif type "open" &> /dev/null; then
