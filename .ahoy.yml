@@ -35,7 +35,7 @@ commands:
       docker-compose up -d
       ahoy docker hostfile
       URL=`ahoy docker url`
-      if [ ! -z "${CIRCLECI}" ] ; then
+      if [ ! -z "${CI}" ] ; then
         echo "Started. You can access your site at $URL"
         exit 0
       fi
