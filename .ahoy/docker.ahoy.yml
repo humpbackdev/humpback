@@ -38,7 +38,12 @@ commands:
   url:
     usage: Prints the project URL
     cmd: |
-      echo "http://127.0.0.1:`ahoy docker compose port nginx 80|cut -d ':' -f2`"
+      DOMAIN=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
+      if [ "$(docker ps -q --filter name=humpback_proxy)" ]; then
+        echo http://$DOMAIN
+      else
+        echo "http://127.0.0.1:`ahoy docker compose port nginx 80|cut -d ':' -f2`"
+      fi
 
   share-url:
     usage: Prints the project share URL
@@ -90,6 +95,36 @@ commands:
           ahoy docker exec nginx tail -f /var/log/nginx/error.log
           ;;
       esac
+
+  proxy-up:
+    usage: Start proxy.
+    cmd: |
+      docker stop $(docker ps -a -q --filter name=humpback_proxy) &> /dev/null
+      docker rm $(docker ps -a -q --filter name=humpback_proxy) &> /dev/null
+      docker run -d -p 8085:8080 -p 80:80 -v $PWD/traefik.toml:/etc/traefik/traefik.toml \
+       -v /var/run/docker.sock:/var/run/docker.sock \
+        --network humpback_proxy \
+         --name humpback_proxy \
+         traefik
+      if [ $? -ne 0 ]; then
+        echo "Proxy startup failed. Is port 8085 or 80 in use?"
+        exit 1
+      fi
+      echo "The proxy has been started. An administrative console can be found at http://localhost:8085"
+
+  hostfile:
+    usage: Write entries in host file.
+    cmd: |
+      DOMAIN=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
+      HOSTS_ENTRY="127.0.0.1 $DOMAIN"
+      if ! grep -q "^$HOSTS_ENTRY$" /etc/hosts; then
+        if [ -w /etc/hosts ]; then
+          echo "$HOSTS_ENTRY" >> /etc/hosts
+        else
+          echo "Adding entry to hosts file, I'll need sudo for this"
+          echo "$HOSTS_ENTRY" | sudo tee -a /etc/hosts > /dev/null
+        fi
+      fi
 
   help:
     usage: Print this help
