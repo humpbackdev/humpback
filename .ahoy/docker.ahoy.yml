@@ -38,9 +38,14 @@ commands:
   url:
     usage: Prints the project URL
     cmd: |
-      DOMAIN=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
       if [ "$(docker ps -q --filter name=humpback_proxy)" ]; then
-        echo http://$DOMAIN
+        DOMAINS_STRING=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
+        while IFS=',' read -ra DOMAINS; do
+          for DOMAIN in "${DOMAINS[@]}"; do
+            echo http://$DOMAIN
+            exit 0
+          done
+        done <<< $DOMAINS_STRING
       else
         echo "http://127.0.0.1:`ahoy docker compose port nginx 80|cut -d ':' -f2`"
       fi
@@ -115,16 +120,20 @@ commands:
   hostfile:
     usage: Write entries in host file.
     cmd: |
-      DOMAIN=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
-      HOSTS_ENTRY="127.0.0.1 $DOMAIN"
-      if ! grep -q "^$HOSTS_ENTRY$" /etc/hosts; then
-        if [ -w /etc/hosts ]; then
-          echo "$HOSTS_ENTRY" >> /etc/hosts
-        else
-          echo "Adding entry to hosts file, I'll need sudo for this"
-          echo "$HOSTS_ENTRY" | sudo tee -a /etc/hosts > /dev/null
-        fi
-      fi
+      DOMAINS_STRING=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
+      while IFS=',' read -ra DOMAINS; do
+        for DOMAIN in "${DOMAINS[@]}"; do
+          HOSTS_ENTRY="127.0.0.1 $DOMAIN"
+          if ! grep -q "^$HOSTS_ENTRY$" /etc/hosts; then
+            if [ -w /etc/hosts ]; then
+              echo "$HOSTS_ENTRY" >> /etc/hosts
+            else
+              echo "Adding entry to hosts file, I'll need sudo for this"
+              echo "$HOSTS_ENTRY" | sudo tee -a /etc/hosts > /dev/null
+            fi
+          fi
+        done
+      done <<< $DOMAINS_STRING
 
   help:
     usage: Print this help

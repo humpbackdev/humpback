@@ -61,6 +61,10 @@ It's a reverse proxy usually used in production. It's bundled here for situation
 
 To see the the mailhog UI, run `ahoy docker mailhog-url` and access that url from the browser. Your new messages will appear there.
 
+### Traefik
+
+This is a proxy used to route request for given domain to nginx backend. To use it, you just need to have a .env file in the root of this folder with `VIRTUAL_HOST` variable set to any wanted domain. When you run `ahoy up` the magic will happen and you'll be able to open that domain in your browser and get your site. If you need more than one domain, set them in the same variable separated by comma.
+
 ## Contributing
 
 Use the project, fork it, and submit PRs. We are responsive and will review them as soon as possible!
