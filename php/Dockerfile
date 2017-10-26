@@ -1,4 +1,4 @@
-FROM kporras07/docker-php:v1.1
+FROM kporras07/docker-php:v1.2
 
 # Install mhsendmail.
 RUN apk update && apk add \
