@@ -35,7 +35,7 @@ services:
       - solr
       - memcached
     volumes:
-        - "./:/var/www/html"
+      - "./:/var/www/html:delegated"
     networks:
       - internal
 
@@ -54,7 +54,7 @@ services:
     links:
       - php
     volumes:
-        - "./:/var/www/html"
+      - "./:/var/www/html:delegated"
     networks:
       - internal
       - humpback_proxy
@@ -69,8 +69,8 @@ services:
       - memcached
       - browser
     volumes:
-        - "./:/var/www/html"
-        - "~/.ssh:/.ssh"
+      - "./:/var/www/html:delegated"
+      - "~/.ssh:/.ssh:delegated"
     networks:
       - internal
 
