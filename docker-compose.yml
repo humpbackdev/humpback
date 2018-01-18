@@ -45,7 +45,7 @@ services:
       - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
     labels:
       - 'traefik.enable=true'
-      - 'traefik.backend=DDL-${VIRTUAL_HOST-localhost}'
+      - 'traefik.backend=nginx'
       - 'traefik.frontend.rule=Host:${VIRTUAL_HOST-localhost}'
       - 'traefik.docker.network=humpback_proxy'
       - 'traefik.port=80'
@@ -110,20 +110,37 @@ services:
     environment:
       - VARNISH_BACKEND_ADDRESS=nginx
       - VARNISH_BACKEND_PORT=80
+      - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
     links:
       - nginx
     ports:
       - "80"
     networks:
       - internal
+      - humpback_proxy
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.backend=varnish'
+      - 'traefik.frontend.rule=Host:varnish.${VIRTUAL_HOST-localhost}'
+      - 'traefik.docker.network=humpback_proxy'
+      - 'traefik.port=80'
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
     ports:
       - "1025"
       - "8025"
     networks:
       - internal
+      - humpback_proxy
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.backend=mailhog'
+      - 'traefik.frontend.rule=Host:mailhog.${VIRTUAL_HOST-localhost}'
+      - 'traefik.docker.network=humpback_proxy'
+      - 'traefik.port=8025'
 networks:
   humpback_proxy:
     external: true

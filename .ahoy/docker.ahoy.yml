@@ -129,12 +129,18 @@ commands:
       while IFS=',' read -ra DOMAINS; do
         for DOMAIN in "${DOMAINS[@]}"; do
           HOSTS_ENTRY="127.0.0.1 $DOMAIN"
+          MAILHOG_ENTRY="127.0.0.1 mailhog.$DOMAIN"
+          VARNISH_ENTRY="127.0.0.1 varnish.$DOMAIN"
           if ! grep -q "^$HOSTS_ENTRY$" /etc/hosts; then
             if [ -w /etc/hosts ]; then
               echo "$HOSTS_ENTRY" >> /etc/hosts
+              echo "$MAILHOG_ENTRY" >> /etc/hosts
+              echo "$VARNISH_ENTRY" >> /etc/hosts
             else
               echo "Adding entry to hosts file, I'll need sudo for this"
               echo "$HOSTS_ENTRY" | sudo tee -a /etc/hosts > /dev/null
+              echo "$MAILHOG_ENTRY" | sudo tee -a /etc/hosts > /dev/null
+              echo "$VARNISH_ENTRY" | sudo tee -a /etc/hosts > /dev/null
             fi
           fi
         done
