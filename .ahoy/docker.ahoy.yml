@@ -55,6 +55,11 @@ commands:
     cmd: |
       echo "http://127.0.0.1:`ahoy docker compose port share 4040|cut -d ':' -f2`"
 
+  vnc-url:
+    usage: Prints the project vnc URL
+    cmd: |
+      echo "127.0.0.1:`ahoy docker compose port browser 5900|cut -d ':' -f2`"
+
   varnish-url:
     usage: Prints the project varnish URL
     cmd: |
