@@ -70,11 +70,6 @@ commands:
     cmd: |
       echo "http://127.0.0.1:`ahoy docker compose port mailhog 8025|cut -d ':' -f2`"
 
-  surl:
-    usage: Prints a secure project URL
-    cmd: |
-      echo "https://127.0.0.1:`ahoy docker compose port nginx 443|cut -d ':' -f2`"
-
   cleanup:
     usage: Clean ups docker unused images and volumes. See http://blog.yohanliyanage.com/2015/05/docker-clean-up-after-yourself/.
     cmd: |
