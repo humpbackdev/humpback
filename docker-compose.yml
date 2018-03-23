@@ -25,6 +25,9 @@ services:
       - "3306"
     networks:
       - internal
+    volumes:
+      - 'humpback_database:/var/lib/mysql'
+      - './mysql:/etc/mysql/conf.d'
 
   php:
     build: ./php
@@ -141,6 +144,8 @@ services:
       - 'traefik.frontend.rule=Host:mailhog.${VIRTUAL_HOST-localhost}'
       - 'traefik.docker.network=humpback_proxy'
       - 'traefik.port=8025'
+volumes:
+  humpback_database: {}
 networks:
   humpback_proxy:
     external: true
