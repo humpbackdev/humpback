@@ -1,7 +1,7 @@
 version: "3"
 services:
   solr:
-    build: ./solr
+    image: solr:6-alpine
     expose:
       - "8983"
     entrypoint:
@@ -11,6 +11,8 @@ services:
       - "collection1"
       - "-d"
       - "/config"
+    volumes:
+      - './solr/config:/config'
     networks:
       - internal
 
@@ -30,7 +32,7 @@ services:
       - './mysql:/etc/mysql/conf.d'
 
   php:
-    build: ./php
+    image: kporras07/docker-php:v1.3
     expose:
       - "9000"
     links:
@@ -43,7 +45,7 @@ services:
       - internal
 
   nginx:
-    build: ./nginx
+    image: nginx:alpine
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
     labels:
@@ -58,6 +60,7 @@ services:
       - php
     volumes:
       - "./:/var/www/html:delegated"
+      - "./nginx/default.conf:/etc/nginx/conf.d/default.conf"
     networks:
       - internal
       - humpback_proxy
