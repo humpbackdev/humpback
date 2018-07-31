@@ -63,12 +63,32 @@ commands:
   varnish-url:
     usage: Prints the project varnish URL
     cmd: |
-      echo "http://127.0.0.1:`ahoy docker compose port varnish 80|cut -d ':' -f2`"
+      if [ "$(docker ps -q --filter name=humpback_proxy)" ]; then
+        DOMAINS_STRING=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
+        while IFS=',' read -ra DOMAINS; do
+          for DOMAIN in "${DOMAINS[@]}"; do
+            echo http://varnish.$DOMAIN
+            exit 0
+          done
+        done <<< $DOMAINS_STRING
+      else
+        echo "http://127.0.0.1:`ahoy docker compose port varnish 80|cut -d ':' -f2`"
+      fi
 
   mailhog-url:
     usage: Prints the project mailhog URL
     cmd: |
-      echo "http://127.0.0.1:`ahoy docker compose port mailhog 8025|cut -d ':' -f2`"
+      if [ "$(docker ps -q --filter name=humpback_proxy)" ]; then
+        DOMAINS_STRING=$(docker-compose exec nginx printenv VIRTUAL_HOST | tr -d '\r')
+        while IFS=',' read -ra DOMAINS; do
+          for DOMAIN in "${DOMAINS[@]}"; do
+            echo http://mailhog.$DOMAIN
+            exit 0
+          done
+        done <<< $DOMAINS_STRING
+      else
+        echo "http://127.0.0.1:`ahoy docker compose port mailhog 8025|cut -d ':' -f2`"
+      fi
 
   cleanup:
     usage: Clean ups docker unused images and volumes. See http://blog.yohanliyanage.com/2015/05/docker-clean-up-after-yourself/.
