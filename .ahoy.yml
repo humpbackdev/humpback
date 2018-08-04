@@ -25,7 +25,7 @@ commands:
     usage: Start a shell in the container (like ssh without actual ssh).
 
   sqlc:
-    cmd: "docker-compose run cli drush --root=. sqlc"
+    cmd: "docker-compose run cli drush --root=/var/www/html/web sqlc"
     usage: Connect to the default mysql database. Supports piping of data into the command.
 
   up:
