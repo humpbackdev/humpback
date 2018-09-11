@@ -33,6 +33,7 @@ services:
 
   php:
     image: kporras07/docker-php:v1.3
+    user: "${CONTAINER_UID}"
     expose:
       - "9000"
     links:
