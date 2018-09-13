@@ -33,6 +33,9 @@ services:
 
   php:
     image: kporras07/docker-php:v1.3
+    environment:
+      - PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE}
     user: "${CONTAINER_UID}"
     expose:
       - "9000"
