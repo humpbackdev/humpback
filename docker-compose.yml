@@ -33,6 +33,7 @@ services:
 
   php:
     image: kporras07/docker-php:v1.3
+    user: "${CONTAINER_UID}"
     expose:
       - "9000"
     links:
@@ -56,6 +57,8 @@ services:
       - 'traefik.port=80'
     ports:
       - "80"
+    depends_on:
+      - php
     links:
       - php
     volumes:
