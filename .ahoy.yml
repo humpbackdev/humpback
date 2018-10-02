@@ -34,6 +34,7 @@ commands:
 
   up:
     cmd: |
+      source .env
       docker network create humpback_proxy &> /dev/null
       ahoy docker proxy-up
       docker-compose up -d
