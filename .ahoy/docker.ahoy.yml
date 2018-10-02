@@ -121,6 +121,12 @@ commands:
           ;;
       esac
 
+  setup-xdebug:
+    usage: Setup xdebug
+    cmd: |
+      docker-compose exec -u 0 -T php sh -c "docker-php-ext-enable xdebug"
+      docker-compose restart php
+
   proxy-up:
     usage: Start proxy.
     cmd: |
