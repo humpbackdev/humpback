@@ -137,6 +137,21 @@ commands:
       fi
       echo "The proxy has been started. An administrative console can be found at http://localhost:8085"
 
+  lighthouse-up:
+    usage: Start lighthouse.
+    cmd: |
+      docker stop $(docker ps -a -q --filter name=humpback_lighthouse) &> /dev/null
+      docker rm $(docker ps -a -q --filter name=humpback_lighthouse) &> /dev/null
+      docker run -d -p 8080:8080 \
+        --network humpback_proxy \
+        --name humpback_lighthouse \
+        kporras07/lighthouse-ci:nonheadless
+      if [ $? -ne 0 ]; then
+        echo "Lighthouse startup failed. Is port 8080 in use?"
+        exit 1
+      fi
+      echo "Lighthouse has been started. It's running on port 8080"
+
   hostfile:
     usage: Write entries in host file.
     cmd: |
