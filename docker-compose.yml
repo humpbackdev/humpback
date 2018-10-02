@@ -32,7 +32,7 @@ services:
       - './mysql:/etc/mysql/conf.d'
 
   php:
-    image: kporras07/docker-php:v1.4
+    image: kporras07/docker-php:v1.5
     environment:
       - PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE}
@@ -43,6 +43,7 @@ services:
       - db
       - solr
       - memcached
+      - blackfire
     volumes:
       - "./:/var/www/html:delegated"
     networks:
@@ -153,6 +154,14 @@ services:
       - 'traefik.frontend.rule=Host:mailhog.${VIRTUAL_HOST-localhost}'
       - 'traefik.docker.network=humpback_proxy'
       - 'traefik.port=8025'
+  blackfire:
+    image: blackfire/blackfire:1.18.0
+      - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID}
+      - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN}
+    expose:
+      - "8707"
+    networks:
+      - internal
 volumes:
   humpback_database: {}
 networks:
