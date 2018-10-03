@@ -65,6 +65,10 @@ To see the the mailhog UI, run `ahoy docker mailhog-url` and access that url fro
 
 This is a proxy used to route request for given domain to nginx backend. To use it, you just need to have a .env file in the root of this folder with `VIRTUAL_HOST` variable set to any wanted domain. When you run `ahoy up` the magic will happen and you'll be able to open that domain in your browser and get your site. If you need more than one domain, set them in the same variable separated by comma.
 
+### Blackfire
+
+This tool also contains the Blackfire profiling tool, to configure it please put your server id and server token into the `.env` file, for more documentation about Blackfire go to this web page: https://blackfire.io/
+
 ## Contributing
 
 Use the project, fork it, and submit PRs. We are responsive and will review them as soon as possible!
