@@ -158,6 +158,11 @@ commands:
       fi
       echo "Lighthouse has been started. It's running on port 8080"
 
+  backstop:
+    usage: Run backstop.
+    cmd: |
+      docker run --rm -v $(pwd):/src backstopjs/backstopjs $1
+
   hostfile:
     usage: Write entries in host file.
     cmd: |
