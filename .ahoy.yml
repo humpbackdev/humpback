@@ -63,13 +63,13 @@ commands:
     usage: A series of docker commands for development
     imports:
       - .ahoy/docker.ahoy.yml
-    hide: true
+    hide: false
 
   site:
     usage: A series of docker commands for this site
     imports:
       - .ahoy/site.ahoy.yml
-    hide: true
+    hide: false
 
   help:
     usage: Print this help
