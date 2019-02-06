@@ -32,7 +32,7 @@ services:
       - './mysql:/etc/mysql/conf.d'
 
   php:
-    image: kporras07/docker-php:v1.5
+    image: kporras07/docker-php:v1.7
     environment:
       - PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE}
