@@ -17,7 +17,7 @@ commands:
     usage: Restart the docker-compose containers.
 
   composer:
-    cmd: docker-compose run cli composer "$@"
+    cmd: docker-compose run cli php -d memory_limit=-1 /usr/local/bin/composer "$@"
     usage: Run composer commands in the cli service container.
 
   drush:
