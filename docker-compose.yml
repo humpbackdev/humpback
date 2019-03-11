@@ -55,7 +55,7 @@ services:
       - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
     labels:
       - 'traefik.enable=true'
-      - 'traefik.backend=nginx'
+      - 'traefik.backend=${VIRTUAL_HOST}-nginx'
       - 'traefik.frontend.rule=Host:${VIRTUAL_HOST-localhost}'
       - 'traefik.docker.network=humpback_proxy'
       - 'traefik.port=80'
@@ -133,7 +133,7 @@ services:
       - humpback_proxy
     labels:
       - 'traefik.enable=true'
-      - 'traefik.backend=varnish'
+      - 'traefik.backend=${VIRTUAL_HOST}-varnish'
       - 'traefik.frontend.rule=Host:varnish.${VIRTUAL_HOST-localhost}'
       - 'traefik.docker.network=humpback_proxy'
       - 'traefik.port=80'
@@ -150,7 +150,7 @@ services:
       - humpback_proxy
     labels:
       - 'traefik.enable=true'
-      - 'traefik.backend=mailhog'
+      - 'traefik.backend=${VIRTUAL_HOST}-mailhog'
       - 'traefik.frontend.rule=Host:mailhog.${VIRTUAL_HOST-localhost}'
       - 'traefik.docker.network=humpback_proxy'
       - 'traefik.port=8025'
