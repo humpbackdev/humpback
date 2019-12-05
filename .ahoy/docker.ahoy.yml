@@ -125,6 +125,10 @@ commands:
     usage: Setup xdebug
     cmd: |
       docker-compose exec -u 0 -T php sh -c "docker-php-ext-enable xdebug"
+      if [[ "$OSTYPE" == "darwin"* ]]; then
+        docker-compose exec -u 0 -T php sh -c "echo 'xdebug.remote_connect_back=0' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+        docker-compose exec -u 0 -T php sh -c "echo 'xdebug.remote_host=host.docker.internal' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+      fi
       docker-compose restart php
 
   proxy-up:
