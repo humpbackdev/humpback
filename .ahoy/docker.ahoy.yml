@@ -140,7 +140,7 @@ commands:
        -v /var/run/docker.sock:/var/run/docker.sock \
         --network humpback_proxy \
          --name humpback_proxy \
-         traefik
+         traefik:v1.7
       if [ $? -ne 0 ]; then
         echo "Proxy startup failed. Is port 8085 or 80 in use?"
         exit 1
